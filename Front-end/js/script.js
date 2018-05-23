@@ -4,11 +4,11 @@ $(document).ready(function () {
   var SUB_DOCS_LENGTH = 333;
   var FULL_TEXT_LENGTH = 1111;
   var availableTags = [];
-
+  var BASE_URL = 'http://localhost:8983';
   $(".fulltext").hide();
   $("#input-search").keyup(function () {
     var form_search = this.value;
-    var url = 'http://localhost:8983/solr/bangocdata/select?'
+    var url = BASE_URL+'/solr/IT4853/select?'
       + '&q=title:' + form_search
       + '&wt=json&json.wrf=callback';
     $.ajax({
@@ -54,7 +54,7 @@ $(document).ready(function () {
     var listContent = {};
 
     var form_search = $("#input-search").val();
-    var url = 'http://localhost:8983/solr/bangocdata/select?hl.fl=content&hl=on'
+    var url = BASE_URL + '/solr/bangocdata/select?hl.fl=content&hl=on'
       + '&rows=' + numRows
       + '&start=' + startRow
       + '&q=content:' + form_search
@@ -122,7 +122,7 @@ $(document).ready(function () {
         id = doc.id;
 
         // index of hightlight in content
-        if (typeof(doc.content) == 'undefined') 
+        if (typeof(doc.content) == 'undefined')
           continue;
         var index_hlight = doc.content[0].indexOf(hightlight[id].content[0].substr(0, 15));
 
@@ -173,6 +173,4 @@ $(document).ready(function () {
     // console.log(listContent);
 
   }
-
-
 });
